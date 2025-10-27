@@ -13,6 +13,9 @@ const Card = ({ movie, isLargeRow = false }) => {
     isLargeRow ? 'w-56 min-w-[224px]' : 'w-44 min-w-[176px]'
   }`
 
+  const trailerSearchQuery = encodeURIComponent((movie.title || movie.name) + ' trailer official')
+  const trailerUrl = `https://www.youtube.com/embed/videoseries?list=PLrAXtmRdnEQy6nLm8VVY5kNxRLeMGV48o&q=${trailerSearchQuery}`
+
   const handleClick = () => {
     navigate(`/movie/${movie.id}/${movie.Type || 'movie'}`)
   }
@@ -38,14 +41,27 @@ const Card = ({ movie, isLargeRow = false }) => {
       onClick={handleClick}
     >
       <div className="relative overflow-hidden rounded-md group cursor-pointer transition-transform duration-300 hover:scale-105">
-        <img
-          src={getHighQualityImage(getImageUrl(movie.poster_path))}
-          alt={movie.title || movie.name}
-          className="w-full object-cover"
-          style={{
-            height: isLargeRow ? '250px' : '264px',
-          }}
-        />
+        {isHovered ? (
+          <iframe
+            src={trailerUrl}
+            className="w-full object-cover"
+            style={{
+              height: isLargeRow ? '250px' : '264px',
+              pointerEvents: 'none',
+            }}
+            allowFullScreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          />
+        ) : (
+          <img
+            src={getHighQualityImage(getImageUrl(movie.poster_path))}
+            alt={movie.title || movie.name}
+            className="w-full object-cover"
+            style={{
+              height: isLargeRow ? '250px' : '264px',
+            }}
+          />
+        )}
 
         <div
           className={`absolute inset-0 bg-gradient-to-t from-netflix-black via-netflix-black/80 to-transparent flex flex-col justify-end p-4 transition-opacity duration-300 ${
