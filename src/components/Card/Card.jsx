@@ -35,16 +35,18 @@ const Card = ({ movie, isLargeRow = false }) => {
 
   return (
     <div
-      className={`${containerClass} transition-all duration-300 ease-in-out ${
-        isHovered ? 'scale-150 z-50 shadow-2xl' : ''
+      className={`transition-all duration-300 ease-in-out ${
+        isHovered 
+          ? 'w-[600px] min-w-[600px] z-50 shadow-2xl' 
+          : containerClass
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
     >
-      <div className="relative overflow-hidden rounded-md cursor-pointer">
+      <div className="relative overflow-hidden rounded-md cursor-pointer h-full">
         {isHovered ? (
-          <div className="w-full bg-gray-900 flex items-center justify-center" style={{ height: isLargeRow ? '350px' : '400px' }}>
+          <div className="w-full bg-gray-900 flex items-center justify-center" style={{ height: isLargeRow ? '338px' : '264px' }}>
             <iframe
               width="100%"
               height="100%"
