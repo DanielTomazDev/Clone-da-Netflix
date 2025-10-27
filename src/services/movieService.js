@@ -1,81 +1,45 @@
-/**
- * Serviço para buscar dados de filmes e séries da API OMDB
- */
-
 import api from '../config/api'
 import requests from '../config/requests'
 
-/**
- * Busca filmes populares para exibir no banner principal
- */
 export const fetchTrending = async () => {
   return await fetchMoviesByTitles(requests.trending)
 }
 
-/**
- * Busca Netflix Originals
- */
 export const fetchNetflixOriginals = async () => {
   return await fetchMoviesByTitles(requests.netflixOriginals)
 }
 
-/**
- * Busca filmes mais bem avaliados
- */
 export const fetchTopRated = async () => {
   return await fetchMoviesByTitles(requests.topRated)
 }
 
-/**
- * Busca filmes de ação
- */
 export const fetchActionMovies = async () => {
   return await fetchMoviesByTitles(requests.actionMovies)
 }
 
-/**
- * Busca filmes de comédia
- */
 export const fetchComedyMovies = async () => {
   return await fetchMoviesByTitles(requests.comedyMovies)
 }
 
-/**
- * Busca filmes de terror
- */
 export const fetchHorrorMovies = async () => {
   return await fetchMoviesByTitles(requests.horrorMovies)
 }
 
-/**
- * Busca filmes de romance
- */
 export const fetchRomanceMovies = async () => {
   return await fetchMoviesByTitles(requests.romanceMovies)
 }
 
-/**
- * Busca documentários
- */
 export const fetchDocumentaries = async () => {
   return await fetchMoviesByTitles(requests.documentaries)
 }
 
-/**
- * Busca séries bem avaliadas
- */
 export const fetchTopRatedTV = async () => {
   return await fetchMoviesByTitles(requests.topRatedTV)
 }
 
-/**
- * Busca detalhes de um filme/série específico
- */
 export const fetchMovieDetails = async (type, id, season = null) => {
   try {
     const params = { i: id }
-    
-    // Se for busca de temporada de série
     if (season) {
       params.season = season
     }
@@ -88,9 +52,6 @@ export const fetchMovieDetails = async (type, id, season = null) => {
   }
 }
 
-/**
- * Busca filmes/séries por termo de pesquisa
- */
 export const searchMovies = async (query) => {
   try {
     const response = await api.get('', {
@@ -117,9 +78,6 @@ export const searchMovies = async (query) => {
   }
 }
 
-/**
- * Busca múltiplos filmes por títulos específicos (exportado para uso externo)
- */
 const fetchMoviesByTitles = async (titles) => {
   try {
     const promises = titles.map(title =>
@@ -159,6 +117,5 @@ const fetchMoviesByTitles = async (titles) => {
   }
 }
 
-// Exportar para uso externo
 export { fetchMoviesByTitles }
 

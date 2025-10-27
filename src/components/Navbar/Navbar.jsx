@@ -5,10 +5,6 @@ import useScroll from '../../hooks/useScroll'
 import SearchBar from './SearchBar'
 import { useAuth } from '../../context/AuthContext'
 
-/**
- * Componente de navegação principal
- * Possui logo, barra de pesquisa e botão de tema
- */
 const Navbar = () => {
   const [showSearch, setShowSearch] = useState(false)
   const [query, setQuery] = useState('')
@@ -25,7 +21,6 @@ const Navbar = () => {
       }`}
     >
       <div className="flex items-center justify-between px-4 md:px-8 py-4">
-        {/* Logo */}
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2 cursor-pointer">
             <FaPlay className="text-netflix-red text-2xl" />
@@ -35,7 +30,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Menu Desktop */}
         <div className="hidden md:flex items-center space-x-6">
           <button
             onClick={() => setShowSearch(!showSearch)}
@@ -65,7 +59,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Menu Mobile */}
         <div className="md:hidden flex items-center space-x-4">
           <button
             onClick={() => setShowSearch(!showSearch)}
@@ -94,7 +87,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Barra de pesquisa expandida */}
       {showSearch && (
         <SearchBar
           query={query}

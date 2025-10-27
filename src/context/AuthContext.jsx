@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }) => {
   const [watched, setWatched] = useState([])
   const [watchProgress, setWatchProgress] = useState({})
 
-  // Carrega dados do localStorage ao inicializar
   useEffect(() => {
     const savedUser = localStorage.getItem('netflix_user')
     const savedFavorites = localStorage.getItem('netflix_favorites')

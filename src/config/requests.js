@@ -1,10 +1,4 @@
-/**
- * Títulos de filmes para buscar na API OMDB
- * Como a OMDB não tem endpoint de categorias, usamos títulos populares
- */
-
 const requests = {
-  // Filmes populares para o banner
   trending: [
     'Guardians of the Galaxy Vol. 2',
     'Spider-Man: No Way Home',
@@ -14,7 +8,6 @@ const requests = {
     'Interstellar',
   ],
   
-  // Netflix Originals (filmess de sucesso)
   netflixOriginals: [
     'Extraction',
     'The Irishman',
@@ -24,7 +17,6 @@ const requests = {
     'The Old Guard',
   ],
   
-  // Top Rated
   topRated: [
     'The Shawshank Redemption',
     'The Godfather',
@@ -33,7 +25,6 @@ const requests = {
     'Fight Club',
   ],
   
-  // Ação
   actionMovies: [
     'Die Hard',
     'The Matrix',
@@ -42,7 +33,6 @@ const requests = {
     'Mission: Impossible',
   ],
   
-  // Comédia
   comedyMovies: [
     'Superbad',
     'The Hangover',
@@ -51,7 +41,6 @@ const requests = {
     'Zombieland',
   ],
   
-  // Terror
   horrorMovies: [
     'The Shining',
     'Get Out',
@@ -60,7 +49,6 @@ const requests = {
     'Halloween',
   ],
   
-  // Romance
   romanceMovies: [
     'The Notebook',
     'Titanic',
@@ -69,7 +57,6 @@ const requests = {
     'La La Land',
   ],
   
-  // Documentários
   documentaries: [
     'Free Solo',
     'The Social Dilemma',
@@ -78,7 +65,6 @@ const requests = {
     'Amy',
   ],
   
-  // Séries
   topRatedTV: [
     'Game of Thrones',
     'Breaking Bad',

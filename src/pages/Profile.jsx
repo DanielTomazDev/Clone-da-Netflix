@@ -4,10 +4,6 @@ import { FaSignOutAlt, FaHeart, FaCheck, FaClock } from 'react-icons/fa'
 import Card from '../components/Card/Card'
 import { getImageUrl, getHighQualityImage } from '../config/constants'
 
-/**
- * Página de Perfil do Usuário
- * Mostra informações do usuário, favoritos e assistidos
- */
 const Profile = () => {
   const { user, logout, favorites, watched } = useAuth()
   const navigate = useNavigate()

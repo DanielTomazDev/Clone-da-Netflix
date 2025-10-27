@@ -3,17 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import { FaPlay, FaInfoCircle } from 'react-icons/fa'
 import { getImageUrl, getHighQualityImage } from '../../config/constants'
 
-/**
- * Componente Banner principal
- * Exibe um filme em destaque com informações e call-to-action
- */
 const Banner = ({ movies }) => {
   const [currentMovie, setCurrentMovie] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
     if (movies && movies.length > 0) {
-      // Seleciona um filme aleatório
       const randomMovie = movies[Math.floor(Math.random() * movies.length)]
       setCurrentMovie(randomMovie)
     }
@@ -25,6 +20,10 @@ const Banner = ({ movies }) => {
     }
   }
 
+  const truncate = (str, n) => {
+    return str?.length > n ? str.substr(0, n - 1) + '...' : str
+  }
+
   if (!currentMovie) {
     return (
       <div className="h-screen flex items-center justify-center bg-netflix-black">
@@ -33,14 +32,8 @@ const Banner = ({ movies }) => {
     )
   }
 
-  // Truncar a descrição se for muito longa
-  const truncate = (str, n) => {
-    return str?.length > n ? str.substr(0, n - 1) + '...' : str
-  }
-
   return (
     <header className="relative h-screen text-white flex items-end">
-      {/* Imagem de fundo com overlay */}
       <div className="absolute inset-0">
         <div
           className="absolute inset-0"
@@ -54,7 +47,6 @@ const Banner = ({ movies }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-netflix-black via-transparent to-black" />
       </div>
 
-      {/* Conteúdo do banner */}
       <div className="relative z-10 max-w-3xl px-6 md:px-16 pb-32">
         <h1 className="text-3xl md:text-6xl font-bold mb-4">
           {currentMovie?.title || currentMovie?.name}

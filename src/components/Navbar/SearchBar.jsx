@@ -4,9 +4,6 @@ import { searchMovies } from '../../services/movieService'
 import { FaTimes } from 'react-icons/fa'
 import { getImageUrl } from '../../config/constants'
 
-/**
- * Componente de barra de pesquisa
- */
 const SearchBar = ({ query, setQuery, onClose }) => {
   const [results, setResults] = useState([])
   const [loading, setLoading] = useState(false)

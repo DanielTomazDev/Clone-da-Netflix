@@ -2,13 +2,6 @@ import { useState } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import Card from '../Card/Card'
 
-/**
- * Componente Row
- * Exibe uma fileira horizontal de cards com scroll suave
- * @param {string} title - Título da seção
- * @param {Array} movies - Array de filmes/séries
- * @param {boolean} isLargeRow - Se true, exibe cards maiores
- */
 const Row = ({ title, movies, isLargeRow = false }) => {
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -37,7 +30,6 @@ const Row = ({ title, movies, isLargeRow = false }) => {
       <h2 className="text-xl md:text-2xl font-bold mb-4">{title}</h2>
 
       <div className="relative group">
-        {/* Botão de rolagem à esquerda */}
         <button
           onClick={() => handleScroll('left')}
           className={`absolute left-0 top-0 bottom-0 z-10 bg-gradient-to-r from-netflix-black to-transparent p-4 hover:bg-opacity-100 transition-all ${
@@ -48,7 +40,6 @@ const Row = ({ title, movies, isLargeRow = false }) => {
           <FaChevronLeft className="text-2xl text-white" />
         </button>
 
-        {/* Container de scroll */}
         <div
           id={`row-${title}`}
           onScroll={handleScrollContainer}
@@ -63,7 +54,6 @@ const Row = ({ title, movies, isLargeRow = false }) => {
           ))}
         </div>
 
-        {/* Botão de rolagem à direita */}
         <button
           onClick={() => handleScroll('right')}
           className="absolute right-0 top-0 bottom-0 z-10 bg-gradient-to-l from-netflix-black to-transparent p-4 hover:bg-opacity-100 transition-all opacity-0 group-hover:opacity-100"

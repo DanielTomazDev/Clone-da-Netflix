@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import Banner from '../components/Banner/Banner'
 import Row from '../components/Row/Row'
-import Modal from '../components/Modal/Modal'
 import {
   fetchTrending,
   fetchNetflixOriginals,
@@ -14,10 +13,6 @@ import {
   fetchTopRatedTV,
 } from '../services/movieService'
 
-/**
- * Página principal do Netflix Clone
- * Carrega e exibe todas as seções de filmes e séries
- */
 const Home = () => {
   const [bannerMovies, setBannerMovies] = useState([])
   const [netflixOriginals, setNetflixOriginals] = useState([])
@@ -29,15 +24,13 @@ const Home = () => {
   const [documentaries, setDocumentaries] = useState([])
   const [topRatedTV, setTopRatedTV] = useState([])
   const [loading, setLoading] = useState(true)
-  const [selectedMovie, setSelectedMovie] = useState(null)
 
-  // Carrega todos os dados da API
   useEffect(() => {
     const loadData = async () => {
       try {
-        setLoading(true)
+          setLoading(true)
 
-        const [
+          const [
           trendingData,
           originalsData,
           topRatedData,
@@ -67,31 +60,29 @@ const Home = () => {
         setNetflixOriginals(filterValidMovies(originalsData))
         setTopRated(filterValidMovies(topRatedData))
         setActionMovies(filterValidMovies(actionData))
-        setComedyMovies(filterValidMovies(comedyData))
-        setHorrorMovies(filterValidMovies(horrorData))
-        setRomanceMovies(filterValidMovies(romanceData))
-        setDocumentaries(filterValidMovies(documentaryData))
-        setTopRatedTV(filterValidMovies(tvData))
-      } catch (error) {
-        console.error('Erro ao carregar dados:', error)
-        // Mesmo com erro, permite mostrar o conteúdo
-        setLoading(false)
-      } finally {
-        setLoading(false)
+          setComedyMovies(filterValidMovies(comedyData))
+          setHorrorMovies(filterValidMovies(horrorData))
+          setRomanceMovies(filterValidMovies(romanceData))
+          setDocumentaries(filterValidMovies(documentaryData))
+          setTopRatedTV(filterValidMovies(tvData))
+        } catch (error) {
+          console.error('Erro ao carregar dados:', error)
+          setLoading(false)
+        } finally {
+          setLoading(false)
+        }
       }
-    }
 
-    // Timeout para garantir que não fique travado
-    const timeout = setTimeout(() => {
+      const timeout = setTimeout(() => {
       setLoading(false)
     }, 15000) // 15 segundos máximo
 
-    loadData()
+      loadData()
 
-    return () => clearTimeout(timeout)
-  }, [])
+      return () => clearTimeout(timeout)
+    }, [])
 
-  if (loading) {
+    if (loading) {
     return (
       <div className="h-screen flex items-center justify-center bg-netflix-black">
         <div className="text-center">
@@ -106,10 +97,8 @@ const Home = () => {
 
   return (
     <div className="bg-netflix-black">
-      {/* Banner principal */}
       <Banner movies={bannerMovies} />
 
-      {/* Seções de filmes e séries */}
       <main className="relative -mt-32 z-10">
         <Row
           title="Netflix Originals"
@@ -131,14 +120,6 @@ const Home = () => {
 
         <Row title="Documentários" movies={documentaries} />
       </main>
-
-      {/* Modal de detalhes */}
-      {selectedMovie && (
-        <Modal
-          movie={selectedMovie}
-          onClose={() => setSelectedMovie(null)}
-        />
-      )}
     </div>
   )
 }

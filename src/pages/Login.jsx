@@ -3,10 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { FaPlay } from 'react-icons/fa'
 
-/**
- * Página de Login e Registro
- * Permite ao usuário fazer login ou criar uma conta
- */
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true)
   const [name, setName] = useState('')

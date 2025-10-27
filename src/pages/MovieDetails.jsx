@@ -7,10 +7,6 @@ import { useAuth } from '../context/AuthContext'
 import Row from '../components/Row/Row'
 import Card from '../components/Card/Card'
 
-/**
- * Página de detalhes do filme/série
- * Exibe informações completas, episódios (se série) e filmes recomendados
- */
 const MovieDetails = () => {
   const { id, type } = useParams()
   const navigate = useNavigate()

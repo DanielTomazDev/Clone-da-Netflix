@@ -4,18 +4,11 @@ import { getImageUrl, getHighQualityImage } from '../../config/constants'
 import { useAuth } from '../../context/AuthContext'
 import { FaPlay, FaInfoCircle, FaHeart, FaCheck } from 'react-icons/fa'
 
-/**
- * Componente Card
- * Exibe um card de filme/série com efeito hover
- * @param {Object} movie - Objeto do filme/série
- * @param {boolean} isLargeRow - Se true, exibe o card em tamanho maior
- */
 const Card = ({ movie, isLargeRow = false }) => {
   const [isHovered, setIsHovered] = useState(false)
   const navigate = useNavigate()
   const { isFavorite, isWatched, toggleFavorite, markAsWatched } = useAuth()
 
-  // Determina o tamanho da imagem baseado no tipo de row
   const containerClass = `relative inline-block ${
     isLargeRow ? 'w-56 min-w-[224px]' : 'w-44 min-w-[176px]'
   }`
@@ -54,7 +47,6 @@ const Card = ({ movie, isLargeRow = false }) => {
           }}
         />
 
-        {/* Overlay com informações */}
         <div
           className={`absolute inset-0 bg-gradient-to-t from-netflix-black via-netflix-black/80 to-transparent flex flex-col justify-end p-4 transition-opacity duration-300 ${
             isHovered ? 'opacity-100' : 'opacity-0'
@@ -111,7 +103,6 @@ const Card = ({ movie, isLargeRow = false }) => {
         </div>
       </div>
 
-      {/* Badges de status */}
       <div className="absolute top-2 right-2 flex space-x-2 z-10">
         {isFav && (
           <div className="bg-netflix-red rounded-full p-1.5">
@@ -125,7 +116,6 @@ const Card = ({ movie, isLargeRow = false }) => {
         )}
       </div>
 
-      {/* Título abaixo do card (tela grande) */}
       {!isHovered && (
         <h3 className="mt-2 text-sm font-medium truncate px-1">
           {movie.title || movie.name}
