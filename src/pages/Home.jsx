@@ -74,12 +74,21 @@ const Home = () => {
         setTopRatedTV(filterValidMovies(tvData))
       } catch (error) {
         console.error('Erro ao carregar dados:', error)
+        // Mesmo com erro, permite mostrar o conteúdo
+        setLoading(false)
       } finally {
         setLoading(false)
       }
     }
 
+    // Timeout para garantir que não fique travado
+    const timeout = setTimeout(() => {
+      setLoading(false)
+    }, 15000) // 15 segundos máximo
+
     loadData()
+
+    return () => clearTimeout(timeout)
   }, [])
 
   if (loading) {
