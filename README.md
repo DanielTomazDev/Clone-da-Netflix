@@ -1,43 +1,99 @@
-# 🎬 Netflix Clone
+# 🎬 Netflix Clone - Projeto React
 
-Clone da Netflix criado com React + Vite, usando a API do OMDB (Open Movie Database).
+Olá! Sou **Daniel Tomaz**, desenvolvedor Front-End, e este é meu projeto de clone da Netflix. Construí essa aplicação completa usando **React + Vite** com o objetivo de demonstrar minhas habilidades em desenvolvimento web moderno.
 
-## 🚀 Tecnologias
+## 📋 Sobre o Projeto
 
-- **React 18** - Biblioteca JavaScript para construção de interfaces
-- **Vite** - Build tool e dev server ultra-rápido
+Este projeto foi desenvolvido como uma demonstração completa das minhas competências em:
+- **React Hooks** (useState, useEffect, Context API)
+- **Gerenciamento de Estado** (localStorage + Context)
+- **Integração com APIs** (OMDB API)
+- **Design Responsivo** (mobile-first com Tailwind CSS)
+- **Roteamento** (React Router)
+- **UX/UI Moderna**
+
+## 🚀 Tecnologias Utilizadas
+
+- **React 18** - Biblioteca JavaScript para interfaces
+- **Vite** - Build tool ultra-rápido
 - **Tailwind CSS** - Framework CSS utilitário
-- **Axios** - Cliente HTTP para fazer requisições à API
-- **React Icons** - Biblioteca de ícones para React
-- **OMDB API** - API para buscar informações de filmes e séries do IMDb
+- **React Router DOM** - Roteamento de aplicação
+- **Axios** - Cliente HTTP para chamadas à API
+- **React Icons** - Ícones SVG
+- **OMDB API** - API de filmes e séries
 
-## 📋 Funcionalidades
+## ✨ Funcionalidades Implementadas
 
-✅ Banner principal dinâmico com filme em destaque  
-✅ Barra de navegação fixa com efeito ao rolar  
-✅ Múltiplas seções de filmes (Em Alta, Ação, Comédia, Terror, Romance, etc.)  
-✅ Scroll horizontal suave nas seções  
-✅ Cards de filmes com efeito hover  
-✅ Modal com detalhes completos do filme  
-✅ Barra de pesquisa funcional  
-✅ Dark/Light mode  
-✅ Design totalmente responsivo  
-✅ Componentização e reutilização de código  
-✅ Hooks customizados  
+### Sistema de Autenticação
+- Login e registro de usuários
+- Página de perfil personalizado
+- Persistência com localStorage
+- Context API para gerenciamento global
 
-## 🛠️ Como Usar
+### Catálogo de Filmes
+- Banner principal dinâmico com filme em destaque
+- 8+ seções organizadas (Em Alta, Ação, Comédia, Terror, Romance, etc.)
+- Busca em tempo real
+- Imagens em alta qualidade
+
+### Páginas Individuais de Detalhes
+- Informações completas de cada filme/série
+- Sistema de episódios com seletor de temporadas
+- Filmes recomendados baseados em gênero
+- Botões de interação (Assistir, Favoritar, Marcar como assistido)
+
+### Sistema de Interação
+- **Favoritos**: usuários podem favoritar filmes
+- **Assistidos**: controle de filmes já vistos
+- **Indicadores visuais**: badges nos cards
+- **Progresso**: rastreamento de onde parou
+
+### Design Responsivo
+- Mobile-first approach
+- Breakpoints: mobile, tablet, desktop
+- Scroll horizontal suave
+- Hover effects profissionais
+- Dark mode nativo
+
+## 🏗️ Estrutura do Projeto
+
+```
+src/
+├── components/        # Componentes reutilizáveis
+│   ├── Banner/       # Banner hero
+│   ├── Card/         # Cards de filmes
+│   ├── Modal/        # Modal de detalhes
+│   ├── Navbar/       # Barra de navegação
+│   └── Row/          # Seções horizontais
+├── pages/            # Páginas da aplicação
+│   ├── Home.jsx      # Página inicial
+│   ├── Login.jsx     # Login/Registro
+│   ├── Profile.jsx   # Perfil do usuário
+│   └── MovieDetails.jsx  # Detalhes do filme
+├── context/          # Context API
+│   └── AuthContext.jsx   # Gerenciamento de usuário
+├── hooks/            # Hooks customizados
+│   ├── useFetch.js
+│   └── useScroll.js
+├── services/         # Camada de serviços
+│   └── movieService.js   # Funções da API
+└── config/           # Configurações
+    ├── api.js        # Configuração Axios
+    ├── requests.js   # Endpoints da API
+    └── constants.js  # Constantes globais
+```
+
+## 📦 Instalação e Execução
 
 ### Pré-requisitos
-
 - Node.js 18+ instalado
-- Conta no TMDB (gratuita)
 
-### Instalação
+### Passos
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/netflix-clone.git
-cd netflix-clone
+git clone https://github.com/DanielTomazDev/Clone-da-Netflix.git
+cd Clone-da-Netflix
 ```
 
 2. Instale as dependências:
@@ -45,120 +101,118 @@ cd netflix-clone
 npm install
 ```
 
-3. Configure as variáveis de ambiente:
-```bash
-# Copie o arquivo env.example para .env
-cp env.example .env
-
-# A API Key já está configurada, mas você pode trocar se quiser
-# Obtenha sua própria key em: http://www.omdbapi.com
-```
-
-5. Inicie o servidor de desenvolvimento:
+3. Execute o projeto:
 ```bash
 npm run dev
 ```
 
-6. Acesse no navegador:
+4. Acesse no navegador:
 ```
 http://localhost:5173
 ```
 
-## 📦 Scripts Disponíveis
-
-- `npm run dev` - Inicia o servidor de desenvolvimento
-- `npm run build` - Cria build de produção
-- `npm run preview` - Preview do build de produção
-
 ## 🌐 Deploy
 
-### Vercel (Recomendado)
+Este projeto está deployado no Vercel: **[Link do projeto]**
 
-1. Faça push do código para o GitHub
-2. Acesse https://vercel.com
-3. Conecte seu repositório
-4. Adicione a variável de ambiente `VITE_OMDB_API_KEY=27cb353e`
-5. Deploy automático!
-
-### Netlify
-
-1. Faça push do código para o GitHub
-2. Acesse https://netlify.com
-3. Conecte seu repositório
-4. Adicione a variável de ambiente `VITE_OMDB_API_KEY` em Site settings > Build & deploy > Environment
-5. Deploy!
-
-## 📁 Estrutura do Projeto
+### Configuração para Deploy
+Para fazer deploy em qualquer plataforma (Vercel, Netlify, etc.), adicione a seguinte variável de ambiente:
 
 ```
-netflix-clone/
-├── src/
-│   ├── components/        # Componentes reutilizáveis
-│   │   ├── Navbar/       # Barra de navegação
-│   │   ├── Banner/       # Banner principal
-│   │   ├── Row/          # Seções horizontais
-│   │   ├── Card/         # Card de filme
-│   │   └── Modal/        # Modal de detalhes
-│   ├── config/           # Configurações
-│   │   ├── api.js        # Config Axios
-│   │   ├── requests.js   # Endpoints da API
-│   │   └── constants.js  # Constantes
-│   ├── context/          # Context API
-│   │   └── ThemeContext.jsx
-│   ├── hooks/            # Hooks customizados
-│   │   ├── useFetch.js
-│   │   └── useScroll.js
-│   ├── pages/            # Páginas
-│   │   └── Home.jsx
-│   ├── services/         # Serviços
-│   │   └── movieService.js
-│   ├── App.jsx           # Componente principal
-│   ├── main.jsx          # Entry point
-│   └── index.css         # Estilos globais
-├── public/               # Arquivos estáticos
-├── index.html
-├── package.json
-├── vite.config.js
-├── tailwind.config.js
-└── README.md
+VITE_OMDB_API_KEY=27cb353e
 ```
 
-## 🎨 Customização
+## 💡 Diferenciais Técnicos
 
-### Alterar cores principais
+### 1. Performance
+- Imagens otimizadas em alta qualidade
+- Lazy loading implementado
+- Timeout para evitar travamentos
+- Carregamento assíncrono com Promise.all
 
-Edite `tailwind.config.js`:
+### 2. Experiência do Usuário
+- Feedback visual em todas as ações
+- Loading states adequados
+- Tratamento de erros robusto
+- Transições suaves
 
-```javascript
-theme: {
-  extend: {
-    colors: {
-      'netflix-red': '#E50914',
-      'netflix-black': '#141414',
-    },
-  },
-}
-```
+### 3. Código Limpo
+- Componentização eficiente
+- Hooks customizados reutilizáveis
+- Separação de responsabilidades
+- Nomenclatura semântica
 
-### Adicionar novas seções
+### 4. Boas Práticas
+- Responsive design mobile-first
+- Acessibilidade básica (aria-labels)
+- Estrutura escalável
+- Documentação inline
 
-1. Adicione o endpoint em `src/config/requests.js`
-2. Crie a função em `src/services/movieService.js`
-3. Importe e use em `src/pages/Home.jsx`
+## 🎯 Funcionalidades em Destaque
 
-## 📝 Licença
+### Sistema de Favoritos
+Implementei um sistema completo de favoritos que permite aos usuários:
+- Adicionar/remover filmes dos favoritos
+- Visualizar lista completa no perfil
+- Indicadores visuais nos cards
+- Persistência automática
 
-Este projeto é open source e está disponível sob a licença MIT.
+### Rastreamento de Assistidos
+Sistema que controla:
+- Quais filmes já foram assistidos
+- Badges visuais de status
+- Lista de filmes completados
+- Controle de progresso
 
-## 🤝 Contribuições
+### Páginas de Detalhes
+Para cada filme, criei uma página completa com:
+- Informações detalhadas (diretor, elenco, prêmios)
+- Sistema de episódios (para séries)
+- Seletor de temporadas
+- Grid de filmes recomendados
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
+## 📱 Responsividade
 
-## 📧 Contato
+O projeto foi desenvolvido com foco em todos os dispositivos:
 
-Feito com ❤️ para o seu portfólio!
+- **Mobile** (< 640px): Layout otimizado, navegação simplificada
+- **Tablet** (640px - 1024px): Layout intermediário com melhor aproveitamento
+- **Desktop** (> 1024px): Experiência completa com todos os recursos
+
+## 🔧 Decisões Técnicas
+
+### Por que React + Vite?
+- **Vite** oferece desenvolvimento extremamente rápido
+- HMR (Hot Module Replacement) instantâneo
+- Build otimizado para produção
+
+### Por que Context API?
+- Gerenciamento de estado simples e eficaz
+- Evita prop drilling
+- Ideal para este escopo do projeto
+
+### Por que Tailwind CSS?
+- Desenvolvimento rápido
+- Design system consistente
+- Purge automático para otimização
+
+## 📈 Melhorias Futuras
+
+- [ ] Sistema de comentários e reviews
+- [ ] Player de trailer integrado (YouTube API)
+- [ ] Notificações de novos lançamentos
+- [ ] Recomendação inteligente baseada em IA
+- [ ] Exportação de lista para CSV/JSON
+
+## 📄 Licença
+
+Este projeto foi desenvolvido exclusivamente para fins educacionais e demonstrativos. Todas as informações de filmes são provenientes da API OMDB (Open Movie Database).
 
 ---
 
-**Nota**: Este é um projeto educacional para portfólio. Não há intenção de infringir direitos autorais da Netflix.
+**Desenvolvido por Daniel Tomaz**  
+Portfolio: em construção | GitHub: [DanielTomazDev](https://github.com/DanielTomazDev)
 
+---
+
+**Nota para avaliadores**: Este projeto representa minha capacidade de criar aplicações React modernas, integrando múltiplas tecnologias e seguindo boas práticas de desenvolvimento. Estou aberto a feedback e sugestões de melhoria!
