@@ -13,8 +13,8 @@ const Card = ({ movie, isLargeRow = false }) => {
     isLargeRow ? 'w-56 min-w-[224px]' : 'w-44 min-w-[176px]'
   }`
 
-  const trailerSearchQuery = encodeURIComponent((movie.title || movie.name) + ' trailer official')
-  const trailerUrl = `https://www.youtube.com/embed/videoseries?list=PLrAXtmRdnEQy6nLm8VVY5kNxRLeMGV48o&q=${trailerSearchQuery}`
+  const trailerSearch = `${movie.title || movie.name} trailer`
+  const trailerUrl = `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(trailerSearch)}&autoplay=1&mute=1`
 
   const handleClick = () => {
     navigate(`/movie/${movie.id}/${movie.Type || 'movie'}`)
@@ -42,16 +42,16 @@ const Card = ({ movie, isLargeRow = false }) => {
     >
       <div className="relative overflow-hidden rounded-md group cursor-pointer transition-transform duration-300 hover:scale-105">
         {isHovered ? (
-          <iframe
-            src={trailerUrl}
-            className="w-full object-cover"
-            style={{
-              height: isLargeRow ? '250px' : '264px',
-              pointerEvents: 'none',
-            }}
-            allowFullScreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          />
+          <div className="w-full bg-gray-900 flex items-center justify-center" style={{ height: isLargeRow ? '250px' : '264px' }}>
+            <iframe
+              width="100%"
+              height="100%"
+              src={trailerUrl}
+              allowFullScreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              className="pointer-events-none"
+            />
+          </div>
         ) : (
           <img
             src={getHighQualityImage(getImageUrl(movie.poster_path))}
