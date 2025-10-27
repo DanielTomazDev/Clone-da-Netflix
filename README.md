@@ -80,47 +80,11 @@ src/
 └── config/           # Configurações
     ├── api.js        # Configuração Axios
     ├── requests.js   # Endpoints da API
-    └── constants.js  # Constantes globais
-```
-
-## 📦 Instalação e Execução
-
-### Pré-requisitos
-- Node.js 18+ instalado
-
-### Passos
-
-1. Clone o repositório:
-```bash
-git clone https://github.com/DanielTomazDev/Clone-da-Netflix.git
-cd Clone-da-Netflix
-```
-
-2. Instale as dependências:
-```bash
-npm install
-```
-
-3. Execute o projeto:
-```bash
-npm run dev
-```
-
-4. Acesse no navegador:
-```
-http://localhost:5173
-```
-
+    └── constants.js  # Constantes globais```
+    
 ## 🌐 Deploy
 
-Este projeto está deployado no Vercel: **[Link do projeto]**
-
-### Configuração para Deploy
-Para fazer deploy em qualquer plataforma (Vercel, Netlify, etc.), adicione a seguinte variável de ambiente:
-
-```
-VITE_OMDB_API_KEY=27cb353e
-```
+Este projeto está deployado no Vercel: **[https://vercel.com/programadorseniorgirrafales-projects/clone-da-netflix]**
 
 ## 💡 Diferenciais Técnicos
 
