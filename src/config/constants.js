@@ -1,59 +1,33 @@
-export const IMAGE_URL = ''
-export const IMAGE_URL_SMALL = ''
-export const POSTER_URL = ''
-export const PLACEHOLDER_IMAGE = 'https://via.placeholder.com/500x750?text=Sem+imagem'
-export const TMDB_IMAGE_URL = 'https://image.tmdb.org/t/p/original'
-export const TMDB_IMAGE_URL_W500 = 'https://image.tmdb.org/t/p/w500'
-export const TMDB_IMAGE_URL_W1280 = 'https://image.tmdb.org/t/p/w1280'
+// Configurações da aplicação
+export const TMDB_BASE_URL = 'https://api.themoviedb.org/3'
+export const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p'
 
-export const getImageUrl = (url) => {
-  if (!url || url === 'N/A') return PLACEHOLDER_IMAGE
-  return url
+// URLs de imagens
+export const getImageUrl = (path) => {
+  if (!path) return '/placeholder.jpg'
+  return path
 }
 
-export const getHighQualityImage = (originalUrl) => {
-  if (!originalUrl || originalUrl === 'N/A') return PLACEHOLDER_IMAGE
+export const getHighQualityImage = (path) => {
+  if (!path) return '/placeholder.jpg'
+  return path
+}
+
+// Configurações para trailers
+export const TRAILER_CONFIG = {
+  // Configurações para trailers
+  YOUTUBE_EMBED_BASE: 'https://www.youtube.com/embed/',
+  YOUTUBE_WATCH_BASE: 'https://www.youtube.com/watch?v=',
   
-  let cleanUrl = originalUrl
-    .replace(/_SX\d+_\.jpg/, '.jpg')
-    .replace(/_SY\d+_\.jpg/, '.jpg')
-    .replace(/_UX\d+_\.jpg/, '.jpg')
-    .replace(/_UY\d+_\.jpg/, '.jpg')
-    .replace(/_AL_\d+_\.jpg/, '.jpg')
-    .replace(/\._V1_/, '._V1_')
-    .replace(/_CR\d+,/, '')
+  // Parâmetros padrão para embed
+  DEFAULT_EMBED_PARAMS: {
+    autoplay: 0,
+    controls: 1,
+    rel: 0,
+    modestbranding: 1,
+    showinfo: 0
+  },
   
-  return cleanUrl
-}
-
-export const getTMDBImageByIMDB = async (imdbId, type = 'poster') => {
-  try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/find/${imdbId}?api_key=${import.meta.env.VITE_TMDB_API_KEY || ''}&external_source=imdb_id`
-    )
-    
-    if (!response.ok) return null
-    
-    const data = await response.json()
-    
-    if (data.movie_results && data.movie_results[0]) {
-      if (type === 'backdrop') {
-        return `${TMDB_IMAGE_URL}${data.movie_results[0].backdrop_path}`
-      }
-      return `${TMDB_IMAGE_URL_W500}${data.movie_results[0].poster_path}`
-    }
-    
-    if (data.tv_results && data.tv_results[0]) {
-      if (type === 'backdrop') {
-        return `${TMDB_IMAGE_URL}${data.tv_results[0].backdrop_path}`
-      }
-      return `${TMDB_IMAGE_URL_W500}${data.tv_results[0].poster_path}`
-    }
-    
-    return null
-  } catch (error) {
-    console.error('Erro ao buscar imagem HD:', error)
-    return null
-  }
-}
-
+  // Fallback para filmes sem trailer
+  FALLBACK_MESSAGE: 'Trailer não disponível. Tente buscar no YouTube.'
+};

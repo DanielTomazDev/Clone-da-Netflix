@@ -7,7 +7,7 @@ Olá! Sou **Daniel Tomaz**, desenvolvedor Front-End, e este é meu projeto de cl
 Este projeto foi desenvolvido como uma demonstração completa das minhas competências em:
 - **React Hooks** (useState, useEffect, Context API)
 - **Gerenciamento de Estado** (localStorage + Context)
-- **Integração com APIs** (OMDB API)
+- **Integração com APIs** (TMDB API)
 - **Design Responsivo** (mobile-first com Tailwind CSS)
 - **Roteamento** (React Router)
 - **UX/UI Moderna**
@@ -20,7 +20,7 @@ Este projeto foi desenvolvido como uma demonstração completa das minhas compet
 - **React Router DOM** - Roteamento de aplicação
 - **Axios** - Cliente HTTP para chamadas à API
 - **React Icons** - Ícones SVG
-- **OMDB API** - API de filmes e séries
+- **TMDB API** - API de filmes e séries (The Movie Database)
 
 ## ✨ Funcionalidades Implementadas
 
@@ -30,17 +30,22 @@ Este projeto foi desenvolvido como uma demonstração completa das minhas compet
 - Persistência com localStorage
 - Context API para gerenciamento global
 
-### Catálogo de Filmes
-- Banner principal dinâmico com filme em destaque
+### Catálogo de Filmes e Séries
+- Banner principal dinâmico com filme em destaque e trailer automático
 - 8+ seções organizadas (Em Alta, Ação, Comédia, Terror, Romance, etc.)
-- Busca em tempo real
+- **Scroll automático** quando mouse passar por filme no canto
+- **Trailers integrados** com reprodução automática no hover
 - Imagens em alta qualidade
+- Suporte completo para séries e filmes
 
 ### Páginas Individuais de Detalhes
+- **Layout reorganizado** com informações abaixo da imagem de fundo
 - Informações completas de cada filme/série
+- **Sinopse limitada** com botão expandir/recolher
 - Sistema de episódios com seletor de temporadas
 - Filmes recomendados baseados em gênero
 - Botões de interação (Assistir, Favoritar, Marcar como assistido)
+- **Trailers integrados** com controles de áudio
 
 ### Sistema de Interação
 - **Favoritos**: usuários podem favoritar filmes
@@ -51,9 +56,10 @@ Este projeto foi desenvolvido como uma demonstração completa das minhas compet
 ### Design Responsivo
 - Mobile-first approach
 - Breakpoints: mobile, tablet, desktop
-- Scroll horizontal suave
-- Hover effects profissionais
+- Scroll horizontal suave com **scroll automático inteligente**
+- **Hover effects avançados** com trailers automáticos
 - Dark mode nativo
+- **Layout otimizado** para melhor visualização
 
 ## 🏗️ Estrutura do Projeto
 
@@ -71,15 +77,13 @@ src/
 │   ├── Profile.jsx   # Perfil do usuário
 │   └── MovieDetails.jsx  # Detalhes do filme
 ├── context/          # Context API
-│   └── AuthContext.jsx   # Gerenciamento de usuário
+│   ├── AuthContext.jsx   # Gerenciamento de usuário
+│   └── TrailerContext.jsx # Gerenciamento de trailers
 ├── hooks/            # Hooks customizados
-│   ├── useFetch.js
 │   └── useScroll.js
 ├── services/         # Camada de serviços
-│   └── movieService.js   # Funções da API
+│   └── movieService.js   # Funções da API TMDB
 └── config/           # Configurações
-    ├── api.js        # Configuração Axios
-    ├── requests.js   # Endpoints da API
     └── constants.js  # Constantes globais```
     
 ## 🌐 Deploy
@@ -160,17 +164,38 @@ O projeto foi desenvolvido com foco em todos os dispositivos:
 - Design system consistente
 - Purge automático para otimização
 
+## 🎬 Funcionalidades Avançadas Implementadas
+
+### Sistema de Trailers Inteligente
+- **Reprodução automática** no hover dos cards
+- **Controles de áudio** sem reiniciar o trailer
+- **Scroll automático** para centralizar trailers ativos
+- **Tela cheia automática** após 5 segundos no banner
+- **Integração YouTube** com API completa
+
+### Layout Otimizado
+- **Informações reorganizadas** abaixo da imagem de fundo
+- **Sinopse inteligente** com expansão controlada
+- **Gradiente otimizado** para melhor visualização
+- **Responsividade aprimorada** em todos os dispositivos
+
+### Sistema de Séries
+- **Suporte completo** para séries e filmes
+- **Navegação correta** para páginas de séries
+- **Detalhes específicos** de temporadas e episódios
+- **API TMDB** para dados mais ricos
+
 ## 📈 Melhorias Futuras
 
 - [ ] Sistema de comentários e reviews
-- [ ] Player de trailer integrado (YouTube API)
 - [ ] Notificações de novos lançamentos
 - [ ] Recomendação inteligente baseada em IA
 - [ ] Exportação de lista para CSV/JSON
+- [ ] Modo offline com cache local
 
 ## 📄 Licença
 
-Este projeto foi desenvolvido exclusivamente para fins educacionais e demonstrativos. Todas as informações de filmes são provenientes da API OMDB (Open Movie Database).
+Este projeto foi desenvolvido exclusivamente para fins educacionais e demonstrativos. Todas as informações de filmes são provenientes da API TMDB (The Movie Database).
 
 ---
 

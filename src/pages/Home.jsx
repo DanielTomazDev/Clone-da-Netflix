@@ -28,9 +28,9 @@ const Home = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-          setLoading(true)
+        setLoading(true)
 
-          const [
+        const [
           trendingData,
           originalsData,
           topRatedData,
@@ -52,7 +52,6 @@ const Home = () => {
           fetchTopRatedTV(),
         ])
 
-        // Filtra apenas filmes com imagens válidas
         const filterValidMovies = (movies) =>
           movies.filter((movie) => movie.backdrop_path || movie.poster_path)
 
@@ -60,29 +59,22 @@ const Home = () => {
         setNetflixOriginals(filterValidMovies(originalsData))
         setTopRated(filterValidMovies(topRatedData))
         setActionMovies(filterValidMovies(actionData))
-          setComedyMovies(filterValidMovies(comedyData))
-          setHorrorMovies(filterValidMovies(horrorData))
-          setRomanceMovies(filterValidMovies(romanceData))
-          setDocumentaries(filterValidMovies(documentaryData))
-          setTopRatedTV(filterValidMovies(tvData))
-        } catch (error) {
-          console.error('Erro ao carregar dados:', error)
-          setLoading(false)
-        } finally {
-          setLoading(false)
-        }
+        setComedyMovies(filterValidMovies(comedyData))
+        setHorrorMovies(filterValidMovies(horrorData))
+        setRomanceMovies(filterValidMovies(romanceData))
+        setDocumentaries(filterValidMovies(documentaryData))
+        setTopRatedTV(filterValidMovies(tvData))
+      } catch (error) {
+        console.error('Erro ao carregar dados:', error)
+      } finally {
+        setLoading(false)
       }
+    }
 
-      const timeout = setTimeout(() => {
-      setLoading(false)
-    }, 15000) // 15 segundos máximo
+    loadData()
+  }, [])
 
-      loadData()
-
-      return () => clearTimeout(timeout)
-    }, [])
-
-    if (loading) {
+  if (loading) {
     return (
       <div className="h-screen flex items-center justify-center bg-netflix-black">
         <div className="text-center">

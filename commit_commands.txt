@@ -1,0 +1,30 @@
+# Comandos para executar no terminal do projeto
+
+# 1. Navegar para o diretório do projeto
+cd "D:\Programação\Clone da Netflix"
+
+# 2. Verificar status
+git status
+
+# 3. Adicionar todos os arquivos
+git add .
+
+# 4. Fazer commit
+git commit -m "feat: Implementar scroll automático, corrigir séries e reorganizar layout
+
+- Adicionar scroll automático quando mouse passar por filme no canto
+- Corrigir problema de séries não abrindo página (tipo hardcoded)
+- Reorganizar layout: mover informações do filme para abaixo da imagem
+- Implementar sinopse limitada com botão expandir/recolher
+- Melhorar posicionamento e responsividade
+- Adicionar logs de debug para monitoramento
+- Atualizar gradiente para mostrar mais da imagem de fundo"
+
+# 5. Fazer push
+git push origin main
+
+# 6. Construir nova imagem Docker
+docker build -t danieltomazdev/netflix-clone:latest .
+
+# 7. Fazer push da imagem
+docker push danieltomazdev/netflix-clone:latest

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { FaArrowLeft, FaPlay, FaCalendarAlt, FaStar, FaClock, FaFilm, FaHeart, FaCheck } from 'react-icons/fa'
-import { fetchMovieDetails, fetchMoviesByTitles } from '../services/movieService'
+import { FaArrowLeft, FaPlay, FaCalendarAlt, FaStar, FaClock, FaFilm, FaHeart, FaCheck, FaChevronDown, FaChevronUp } from 'react-icons/fa'
+import { fetchMovieDetails } from '../services/movieService'
 import { getImageUrl } from '../config/constants'
 import { useAuth } from '../context/AuthContext'
 import Row from '../components/Row/Row'
 import Card from '../components/Card/Card'
+import TrailerButton from '../components/Trailer/TrailerButton'
 
 const MovieDetails = () => {
   const { id, type } = useParams()
@@ -17,6 +18,7 @@ const MovieDetails = () => {
   const [recommendedMovies, setRecommendedMovies] = useState([])
   const [loading, setLoading] = useState(true)
   const [selectedSeason, setSelectedSeason] = useState(1)
+  const [isOverviewExpanded, setIsOverviewExpanded] = useState(false)
 
   useEffect(() => {
     const loadMovieDetails = async () => {
@@ -24,13 +26,21 @@ const MovieDetails = () => {
         setLoading(true)
 
         // Busca detalhes do filme
-        const details = await fetchMovieDetails('movie', id)
-        if (!details || details.Response !== 'True') {
+        console.log('Buscando detalhes para:', { type, id })
+        const details = await fetchMovieDetails(type, id)
+        console.log('Detalhes recebidos:', details)
+        if (!details) {
+          console.log('Nenhum detalhe encontrado, redirecionando...')
+          navigate('/')
+          return
+        }
+        if (details.Response !== 'True') {
+          console.log('Response não é True:', details.Response)
           navigate('/')
           return
         }
 
-        // Converte dados da OMDB para formato interno
+        // Converte dados da TMDB para formato interno
         const formattedMovie = {
           id: details.imdbID,
           title: details.Title,
@@ -58,6 +68,16 @@ const MovieDetails = () => {
           Year: details.Year,
           Type: details.Type,
           totalSeasons: details.totalSeasons,
+          // Incluir dados adicionais do TMDB
+          Trailers: details.Trailers || [],
+          Cast: details.Cast || [],
+          Crew: details.Crew || [],
+          BackdropImages: details.BackdropImages || [],
+          PosterImages: details.PosterImages || [],
+          Budget: details.Budget,
+          Status: details.Status,
+          Tagline: details.Tagline,
+          Homepage: details.Homepage,
         }
 
         setMovie(formattedMovie)
@@ -86,8 +106,8 @@ const MovieDetails = () => {
         if (details.Genre) {
           const genres = details.Genre.split(', ')
           const recommendedTitle = genres[0]
-          const recommendations = await fetchMoviesByTitles([recommendedTitle])
-          setRecommendedMovies(recommendations.slice(0, 8))
+          // Para simplificar, vamos usar dados mockados por enquanto
+          setRecommendedMovies([])
         }
 
       } catch (error) {
@@ -158,33 +178,36 @@ const MovieDetails = () => {
   }
 
   return (
-    <div className="min-h-screen bg-netflix-black text-white">
+    <div className="min-h-screen bg-netflix-black text-white pt-16">
       {/* Banner superior com imagem de fundo */}
-      <div className="relative h-[70vh]">
+      <div className="relative h-[80vh] -mt-16">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url(${getImageUrl(movie.backdrop_path)})`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-netflix-black via-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-netflix-black via-transparent to-transparent" />
         
         {/* Botão voltar */}
         <button
           onClick={() => navigate('/')}
-          className="absolute top-6 left-6 z-10 flex items-center space-x-2 px-4 py-2 bg-black/60 hover:bg-black/80 rounded-lg transition-colors"
+          className="absolute top-20 left-6 z-[60] flex items-center space-x-2 px-4 py-2 bg-black/60 hover:bg-black/80 rounded-lg transition-colors"
         >
           <FaArrowLeft />
           <span>Voltar</span>
         </button>
 
-        {/* Informações do filme no banner */}
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+      </div>
+
+      {/* Informações do filme */}
+      <div className="px-8 md:px-16 py-8 bg-netflix-black">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
             {movie.title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-4 mb-4">
+          <div className="flex flex-wrap items-center gap-4 mb-6">
             <div className="flex items-center space-x-2">
               <FaCalendarAlt />
               <span>{movie.Year || formatDate(movie.release_date)}</span>
@@ -220,19 +243,41 @@ const MovieDetails = () => {
             ))}
           </div>
 
-          <p className="text-lg max-w-3xl leading-relaxed mb-6">
-            {movie.overview}
-          </p>
+          <div className="mb-8">
+            <p className={`text-lg max-w-4xl leading-relaxed ${
+              isOverviewExpanded ? '' : 'max-h-24 overflow-hidden text-ellipsis line-clamp-3'
+            }`}>
+              {movie.overview}
+            </p>
+            {movie.overview && movie.overview.length > 200 && (
+              <button
+                onClick={() => setIsOverviewExpanded(!isOverviewExpanded)}
+                className="mt-2 flex items-center space-x-1 text-netflix-red hover:text-red-400 transition-colors text-sm font-medium"
+              >
+                {isOverviewExpanded ? (
+                  <>
+                    <FaChevronUp className="text-xs" />
+                    <span>Ver menos</span>
+                  </>
+                ) : (
+                  <>
+                    <FaChevronDown className="text-xs" />
+                    <span>Ver mais</span>
+                  </>
+                )}
+              </button>
+            )}
+          </div>
 
           <div className="flex flex-wrap gap-4">
             <button className="bg-netflix-red hover:bg-red-700 px-8 py-3 rounded flex items-center space-x-2 font-semibold transition-colors">
               <FaPlay />
               <span>Assistir</span>
             </button>
-            <button className="bg-gray-600 hover:bg-gray-700 px-8 py-3 rounded flex items-center space-x-2 font-semibold transition-colors">
-              <FaFilm />
-              <span>Trailer</span>
-            </button>
+            <TrailerButton 
+              movie={movie} 
+              className="bg-gray-600 hover:bg-gray-700 px-8 py-3 rounded flex items-center space-x-2 font-semibold transition-colors"
+            />
 
             {user && (
               <>
